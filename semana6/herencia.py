@@ -1,44 +1,78 @@
-# Definimos la clase base Animal
+# Clase base o "padre"
 class Animal:
-    # Método constructor: se ejecuta al crear una nueva instancia
-    def __init__(self, nombre, edad, color):
-        self.nombre = nombre      
-        self.edad = edad          
-        self.color = color        
+    # Constructor: define los atributos de instancia comunes
+    def __init__(self, nombre, edad, color, especie, habitat):
+        # Atributos de instancia → cada objeto tendrá sus propios valores
+        self.nombre = nombre
+        self.edad = edad
+        self.color = color
+        self.especie = especie
+        self.habitat = habitat
 
-    # Método de la clase Animal
+    # Método compartido por todas las subclases
     def dormir(self):
-        return "Durmiendo..."    
+        return f"{self.nombre} está durmiendo..."
 
-# Definimos la clase Perro que hereda de Animal
+    # Método genérico que puede ser sobrescrito por las subclases
+    def hacer_sonido(self):
+        return "Hace un sonido..."
+
+
+# Clase hija: Perro hereda de Animal
 class Perro(Animal):
-    # Constructor de la clase Perro
-    def __init__(self, nombre, edad, color, dueño):
-        # Llamamos al constructor de la clase base (Animal)
-        super().__init__(nombre, edad, color)
-        self.dueño = dueño        
+    # Constructor: extiende el del padre con nuevos atributos
+    def __init__(self, nombre, edad, color, especie, habitat, raza, dueño):
+        # super() llama al constructor de la clase base (Animal)
+        super().__init__(nombre, edad, color, especie, habitat)
+        # Nuevos atributos exclusivos del Perro
+        self.raza = raza
+        self.dueño = dueño
 
-    # Método propio de la clase Perro
+    # Métodos propios del Perro
     def comiendo(self):
-        return "Comiendo..."      
+        return f"{self.nombre} está comiendo croquetas."
 
-# Definimos la clase Tortuga que también hereda de Animal
+    def ladrar(self):
+        return f"{self.nombre} dice: ¡Guau guau!"
+    
+    # Clase hija: Tortuga hereda de Animal
 class Tortuga(Animal):
-    # Constructor de la clase Tortuga
-    def __init__(self, nombre, edad, color):
-        # Llamamos al constructor de la clase base
-        super().__init__(nombre, edad, color)
+    def __init__(self, nombre, edad, color, especie, habitat, tamaño):
+        # Llamamos al constructor de la clase base (Animal)
+        super().__init__(nombre, edad, color, especie, habitat)
+        # Atributo exclusivo de la clase Tortuga
+        self.tamaño = tamaño  # en centímetros
 
-    # Método propio de la clase Tortuga
+    # Métodos propios de la Tortuga
     def comiendo(self):
-        return "Comiendo..."      
+        return f"{self.nombre} está comiendo lechuga."
 
-# Creamos un objeto de tipo Perro con sus atributos
-object1 = Perro("Firualais", 2, "Blanco", True)
+    def moverse_lento(self):
+        return f"{self.nombre} se mueve lentamente por el {self.habitat}."
+    
+    # Objeto de tipo Perro → hereda atributos de Animal y añade los suyos
+perro = Perro("Firulais", 4, "Marrón", "Canino", "Casa", "Labrador", "Carlos")
 
-# Creamos un objeto de tipo Tortuga con sus atributos
-object2 = Tortuga("Erik", 200, "Verde")
+# Objeto de tipo Tortuga → también hereda de Animal
+tortuga = Tortuga("Erik", 120, "Verde", "Reptil", "Laguna", 80)
 
-# Llamamos al método comiendo en ambos objetos y mostramos el resultado
-print(object1.comiendo())  
-print(object2.comiendo())  
+
+print(" --- Información del Perro ---")
+print(f"Nombre: {perro.nombre}")
+print(f"Edad: {perro.edad} años")
+print(f"Color: {perro.color}")
+print(f"Raza: {perro.raza}")
+print(f"Dueño: {perro.dueño}")
+print(perro.comiendo())
+print(perro.ladrar())
+print(perro.dormir())
+
+print("\n --- Información de la Tortuga ---")
+print(f"Nombre: {tortuga.nombre}")
+print(f"Edad: {tortuga.edad} años")
+print(f"Tamaño: {tortuga.tamaño} cm")
+print(f"Hábitat: {tortuga.habitat}")
+print(tortuga.comiendo())
+print(tortuga.moverse_lento())
+print(tortuga.dormir())
+
