@@ -47,7 +47,7 @@ Hábitat  : {self.habitat}
         return False
 
 
-# 🔹 Ejemplo de uso
+#  Ejemplo de uso
 animal1 = Animal("Lobo", "Gris", 5, "Canino", 35.5, "Bosque")
 animal2 = Animal("Tigre", "Naranja", 5, "Felino", 220.7, "Selva")
 
@@ -56,3 +56,4 @@ print(animal1)
 print(animal1.dormir())
 print(animal1.comer("carne"))
 print("informacion", repr(animal1))
+
