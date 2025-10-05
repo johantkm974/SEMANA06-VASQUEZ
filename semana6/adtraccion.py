@@ -1,44 +1,55 @@
-# Importamos los módulos necesarios para usar clases abstractas
+# Módulo necesario para crear clases abstractas
 from abc import ABC, abstractmethod
 
-# Definimos la clase abstracta Padre, que hereda de ABC (Abstract Base Class)
+# Clase abstracta base
 class Padre(ABC):
-
-    # Método constructor abstracto: obliga a las subclases a implementarlo
+    # Constructor abstracto → define atributos comunes que las subclases deben inicializar
     @abstractmethod
     def __init__(self, nombre, edad, telefono, correo):
+        # Atributos de instancia
         self.nombre = nombre
         self.edad = edad
         self.telefono = telefono
         self.correo = correo
 
-    # Método abstracto que debe ser implementado por cualquier clase hija
+    # Método abstracto → toda subclase está obligada a implementarlo
     @abstractmethod
     def informacion(self):
         pass
 
-# Definimos la clase Hijo, que hereda de Padre
+
+# Clase hija que hereda de Padre
 class Hijo(Padre):
-
-    # Implementamos el constructor, incluyendo el nuevo atributo 'apodo'
-    def __init__(self, nombre, edad, telefono, correo, apodo):
-        # Llamamos al constructor de la clase padre para inicializar los atributos heredados
+    # Constructor concreto → implementa el constructor abstracto del padre
+    def __init__(self, nombre, edad, telefono, correo, apodo, profesion):
+        # Llamamos al constructor del padre para heredar sus atributos
         super().__init__(nombre, edad, telefono, correo)
-        # Inicializamos el nuevo atributo propio de la clase Hijo
+        # Atributos propios de la subclase
         self.apodo = apodo
+        self.profesion = profesion
 
-    # Implementamos el método informacion que estaba como abstracto en la clase Padre
+    # Implementación del método abstracto del padre
     def informacion(self):
         return f"""
-Nombre : {self.nombre}
-Edad : {self.edad}
-Teléfono: {self.telefono}
-Correo: {self.correo}
-Apodo: {self.apodo}
+👤 Información del Hijo
+Nombre     : {self.nombre}
+Edad       : {self.edad} años
+Teléfono   : {self.telefono}
+Correo     : {self.correo}
+Apodo      : {self.apodo}
+Profesión  : {self.profesion}
 """
 
-# Creamos un objeto de la clase Hijo con datos de ejemplo
-object1 = Hijo("Johan", 23, 97458547, "johan@gmail.com", "gohan")
 
-# Salida  de mi objeto llamando al metodo informacion()
+
+#  Creación de objetos
+
+object1 = Hijo("Johan", 23, 97458547, "johan@gmail.com", "Gohan", "Ingeniero de Software")
+object2 = Hijo("Camila", 19, 98562478, "camila@gmail.com", "Cami", "Diseñadora Gráfica")
+
+
+# Salida del programa
+
 print(object1.informacion())
+print(object2.informacion())
+
